@@ -1,15 +1,12 @@
 import logging
 import os
 import time
+from utils.get_file_path_util import get_log_file_path
 
-from utils.get_file_path_util import GetFilePath
-
-file_path = GetFilePath()
-log_path = file_path.get_log_file_path()
+log_path = get_log_file_path()
 
 if not os.path.exists(log_path):
     os.mkdir(log_path)
-
 
 class Logger:
 

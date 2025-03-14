@@ -1,8 +1,11 @@
 from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.actions import interaction
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
+from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from base.enums import WaitCondition
+from base.enums import WaitCondition, Direction
 from utils.logs_util import logger
 
 
@@ -133,14 +136,18 @@ class BasePage:
         ele = self.find_element(locator)
         self.actions.move_to_element(ele).perform()
 
-    # def move_mouse_by_coordinates(self, x, y):
-    #     """
-    #     move the mouse from x to y
-    #     :param x:
-    #     :param y:
-    #     :return:
-    #     """
-    #     self.actions.move_by_offset(x, y).perform()
+
+    def get_all_texts(self, locator):
+        """
+        get all texts
+        :param locator: the locator
+        :return: the list
+        """
+        all_ele = self.find_elements(locator)
+        result = []
+        for ele in all_ele:
+            result.append(ele.text)
+        return result
 
     def get_text(self, locator):
         """
@@ -162,3 +169,66 @@ class BasePage:
     def back(self, times=1):
         for _ in range(times):
             self.driver.back()
+
+    def swipe_from_left_to_right(self):
+        screen_size = self.driver.get_window_size()
+        screen_width = screen_size['width']
+        screen_height = screen_size['height']
+
+        start_x = screen_width * 0.2
+        start_y = screen_height * 0.7
+        end_x = screen_width * 0.8
+        end_y = screen_height * 0.7
+
+        self.driver.swipe(start_x, start_y, end_x, end_y)
+
+    def swipe_from_right_to_left(self):
+        screen_size = self.driver.get_window_size()
+        screen_width = screen_size['width']
+        screen_height = screen_size['height']
+
+        start_x = screen_width * 0.8
+        start_y = screen_height * 0.7
+        end_x = screen_width * 0.2
+        end_y = screen_height * 0.7
+
+        self.driver.swipe(start_x, start_y, end_x, end_y)
+
+    def swipe(self, direction=Direction, duration=500):
+        screen_size = self.driver.get_window_size()
+        width = screen_size['width']
+        height = screen_size['height']
+        aa = direction
+        if direction == Direction.TO_LEFT:
+            start_x = width * 0.8
+            start_y = height * 0.5
+            end_x = width * 0.2
+            end_y = height * 0.5
+        elif direction == Direction.TO_RIGHT:
+            start_x = width * 0.2
+            start_y = height * 0.5
+            end_x = width * 0.8
+            end_y = height * 0.5
+        elif direction == Direction.TO_UP:
+            start_x = width * 0.5
+            start_y = height * 0.8
+            end_x = width * 0.5
+            end_y = height * 0.2
+        elif direction == Direction.TO_DOWN:
+            start_x = width * 0.5
+            start_y = height * 0.2
+            end_x = width * 0.5
+            end_y = height * 0.8
+        else:
+            raise ValueError("Invalid direction. Must be 'left', 'right', 'up', or 'down'.")
+
+        finger = PointerInput(interaction.POINTER_TOUCH, "finger")
+        actions = ActionBuilder(self.driver, mouse=finger)
+
+        actions.pointer_action.move_to_location(start_x, start_y)
+        actions.pointer_action.pointer_down()
+        actions.pointer_action.pause(duration / 1000)  # pause 方法的单位是秒
+        actions.pointer_action.move_to_location(end_x, end_y)
+        actions.pointer_action.pointer_up()
+
+        actions.perform()

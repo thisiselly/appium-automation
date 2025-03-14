@@ -2,3 +2,8 @@ logs
 *.pyc
 .gitignore
 .idea
+report
+testcases/testcase_calculator/report
+testcases/testcase_yangshipin/report
+testcases/testcase_tasks
+pages/page_tasks

@@ -1,0 +1,21 @@
+connection:
+  url: http://localhost:4723
+
+capabilities:
+  platformName: 'Android'
+  platformVersion: '10'
+  deviceName: 'elly-test'
+  unicodeKeyboard: true
+  resetKeyboard: true
+  noReset: true
+  newCommandTimeout: 6000
+  automationName: 'UiAutomator2'
+
+apps:
+  yangshipin:
+    appPackage: com.cctv.yangshipin.app.androidp
+    appActivity: com.tencent.videolite.android.ui.SplashActivity
+    appWaitActivity: com.tencent.videolite.android.ui.HomeActivity
+  calculator:
+    appPackage: com.google.android.calculator
+    appActivity: com.android.calculator2.Calculator

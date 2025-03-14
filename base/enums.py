@@ -11,3 +11,9 @@ class WaitCondition(Enum):
     INVISIBLE = "INVISIBLE"  # Wait for element to be invisible
     PRESENCE_ALL = "PRESENCE_ALL"  # Wait for all elements to be present in DOM
     VISIBLE_ALL = "VISIBLE_ALL"  # Wait for all elements to be visible
+
+class Direction(Enum):
+    TO_LEFT = "left"
+    TO_RIGHT = "right"
+    TO_UP = "up"
+    TO_DOWN = "down"
