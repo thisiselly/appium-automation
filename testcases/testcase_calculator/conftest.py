@@ -12,7 +12,7 @@ capabilities = settings['capabilities']
 capabilities.update(app_info)
 url = settings['connection']['url']
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def launch_calc():
     driver = webdriver.Remote(url, options=UiAutomator2Options().load_capabilities(capabilities))
     driver.implicitly_wait(4)
