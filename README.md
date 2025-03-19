@@ -2,8 +2,8 @@ This is a personal practice project focused on Android automated testing. It uti
 
 Key features implemented include:
 
-Page Object Model: Implementation of the Page Object pattern for organized and maintainable test code.
-Parameterization: Test data is parameterized, with data being read from CSV or YAML files.
-Fixtures (conftest): Utilization of pytest fixtures (conftest) for setup and teardown operations.
-Allure Reports: Generation of detailed test reports using Allure.
-Logging: Implementation of logging for detailed test execution tracking."
+* Page Object Model: Implementation of the Page Object pattern for organized and maintainable test code.
+* Parameterization: Test data is parameterized, with data being read from CSV or YAML files.
+* Fixtures (conftest): Utilization of pytest fixtures (conftest) for setup and teardown operations.
+* Allure Reports: Generation of detailed test reports using Allure.
+* Logging: Implementation of logging for detailed test execution tracking.
