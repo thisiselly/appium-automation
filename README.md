@@ -1,4 +1,4 @@
-"This is a personal practice project focused on Android automated testing. It utilizes Appium, the pytest testing framework, and Python. The project tests applications including the CCTV Video app and the device's built-in calculator app.
+This is a personal practice project focused on Android automated testing. It utilizes Appium, the pytest testing framework, and Python. The project tests applications including the CCTV Video app and the device's built-in calculator app.
 
 Key features implemented include:
 
